@@ -11,10 +11,10 @@ namespace compro {
         public:
                 SieveOfEratosthenes (std::size_t n) noexcept;
 
-                bool isPrime (std::size_t x) noexcept;
+                bool isPrime (std::size_t x) const noexcept;
 
                 template<class OutputIterator>
-                void makeList (OutputIterator result) noexcept;
+                void makeList (OutputIterator result) const noexcept;
 
         private:
                 std::vector<bool> sieve_;
@@ -43,7 +43,7 @@ namespace compro {
                 }
         }
 
-        bool SieveOfEratosthenes::isPrime (std::size_t x) noexcept {
+        bool SieveOfEratosthenes::isPrime (std::size_t x) const noexcept {
                 assert(x < sieve_.size());
 
                 if (x < 0) {
@@ -55,7 +55,7 @@ namespace compro {
         }
 
         template<class OutputIterator>
-        void SieveOfEratosthenes::makeList (OutputIterator result) noexcept {
+        void SieveOfEratosthenes::makeList (OutputIterator result) const noexcept {
                 for (std::size_t i = 2; i < sieve_.size(); ++i) {
                         if (isPrime(i)) {
                                 *result = i;
