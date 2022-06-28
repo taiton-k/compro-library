@@ -23,6 +23,12 @@ namespace compro {
         };
 
         constexpr bool isPrime (std::int64_t x) noexcept;
+
+        template<typename T, class OutputIterator>
+        constexpr void enumDivisors (T n, OutputIterator result) noexcept;
+
+        template<typename T, class OutputIterator>
+        constexpr void primeFactorize (T n, OutputIterator result) noexcept;
 }
 
 
@@ -83,5 +89,42 @@ namespace compro {
                 }
 
                 return true;
+        }
+
+        template<typename T, class OutputIterator>
+        constexpr void enumDivisors (T n, OutputIterator result) noexcept {
+                for (T i = 1; i * i <= n; ++i) {
+                        if (n % i == 0) {
+                                *result = i;
+                                ++result;
+
+                                if (i != n/i) {
+                                        *result = n/i;
+                                        ++result;
+                                }
+                        }
+                }
+        }
+
+        template<typename T, class OutputIterator>
+        constexpr void primeFactorize (T n, OutputIterator result) noexcept {
+                for (T i = 2; i * i <= n; ++i) {
+                        if (n % i != 0) {
+                                continue;
+                        }
+
+                        int cnt = 0;
+                        while (n % i == 0) {
+                                ++cnt;
+                                n /= i;
+                        }
+
+                        *result = {i, cnt};
+                        ++result;
+                }
+
+                if (n != 1) {
+                        *result = {n, 1};
+                }
         }
 }
