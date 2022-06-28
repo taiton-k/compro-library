@@ -22,7 +22,8 @@ namespace compro {
                 std::vector<bool> sieve_;
         };
 
-        constexpr bool isPrime (std::int64_t x) noexcept;
+        template<typename T>
+        constexpr bool isPrime (T n) noexcept;
 
         template<typename T, class OutputIterator>
         constexpr void enumDivisors (T n, OutputIterator result) noexcept;
@@ -77,13 +78,14 @@ namespace compro {
         }
 
 
-        constexpr bool isPrime (std::int64_t x) noexcept {
-                if (x < 2) {
+        template<typename T>
+        constexpr bool isPrime (T n) noexcept {
+                if (n < 2) {
                         return false;
                 }
 
-                for (int i = 2; i * i <= x; ++i) {
-                        if (x % i == 0) {
+                for (T i = 2; i * i <= n; ++i) {
+                        if (n % i == 0) {
                                 return false;
                         }
                 }
