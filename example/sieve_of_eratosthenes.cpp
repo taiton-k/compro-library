@@ -8,6 +8,8 @@ int main () {
 
         compro::SieveOfEratosthenes sieve(100);
 
+        std::cout << sieve.size() << std::endl; // 100
+
         std::cout << std::boolalpha <<
                 sieve.isPrime(2) << std::endl << // true
                 sieve.isPrime(7) << std::endl << // true
