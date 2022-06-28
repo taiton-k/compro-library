@@ -16,6 +16,8 @@ namespace compro {
                 template<class OutputIterator>
                 void makeList (OutputIterator result) const noexcept;
 
+                std::size_t size () const noexcept;
+
         private:
                 std::vector<bool> sieve_;
         };
@@ -27,9 +29,9 @@ namespace compro {
 
 namespace compro {
 
-        SieveOfEratosthenes::SieveOfEratosthenes (std::size_t n) noexcept {
-                sieve_.resize(n + 1);
-
+        SieveOfEratosthenes::SieveOfEratosthenes (std::size_t n) noexcept :
+                sieve_(n + 1)
+        {
                 sieve_[0] = sieve_[1] = true;
 
                 for (std::size_t i = 2; i * i < n; ++i) {
@@ -62,6 +64,10 @@ namespace compro {
                                 ++result;
                         }
                 }
+        }
+
+        std::size_t SieveOfEratosthenes::size () const noexcept {
+                return sieve_.size() - 1;
         }
 
 
